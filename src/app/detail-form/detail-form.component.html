@@ -1,0 +1,118 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <h3>Enter Your Details</h3>
+      <form (ngSubmit)="addData(detail)" #detail='ngForm'>
+        <!--        <h5>Personal Detail</h5>-->
+
+        <label for="name">Name:</label>
+        <input class="form-control"
+               type="text"
+               id="name"
+               name="name"
+               [ngModel]='name'
+               required
+        >
+
+        <br>
+        <label for="dob"> Date of Birth:</label>
+        <input type="date"
+               class="form-control"
+               id="dob"
+               name="dob"
+               required
+               [(ngModel)]="dob">
+
+        <br>
+        <label for="email"> Email:</label>
+        <input class="form-control"
+               id="email" name="email"
+               [(ngModel)]="email"
+               required
+               email
+               type="email">
+
+        <br>
+        <label for="mobileNumber">Mobile Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="mobileNumber"
+          [(ngModel)]="mobileNum"
+          required
+          [pattern]="'^(0|91)?[6-9][0-9]{9}$'"
+          id="mobileNumber">
+        <!--        <hr>-->
+        <!--        <h5>Educational Detail</h5>-->
+
+        <br>
+        <label for="instituteName">Name of institute or school:</label>
+        <input type="text"
+               class="form-control"
+               id="instituteName"
+               [(ngModel)]="instituteName"
+               required
+               name="instituteName">
+
+        <br>
+        <label for="education">Education:</label>
+        <select class="form-control" id="education" [(ngModel)]="selectedEducation"
+                required
+                name="education">
+          <option *ngFor="let option of educationOptions" [value]="option">{{ option }}</option>
+        </select>
+
+        <br>
+        <div class="form-group">
+          <label>Hobbies (optional):</label>
+          <div *ngFor="let option of hobbyOptions">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input"
+                     type="checkbox"
+                     id="{{ option }}" [(ngModel)]="selectedHobbies[option] "
+                     name="hobbies">
+              <label class="form-check-label" for="{{ option }}">{{ option }}</label>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <label>Gender:</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="male" [(ngModel)]="gender" name="gender" value="male"
+                 required>
+          <label class="form-check-label" for="male">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="female" [(ngModel)]="gender" name="gender" value="female"
+                 required>
+          <label class="form-check-label" for="female">Female</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="other" [(ngModel)]="gender" name="gender" value="other"
+                 required>
+          <label class="form-check-label" for="other">Other</label>
+        </div>
+        <br>
+
+        <br>
+        <label for="address">Address: ( Optional )</label>
+        <input class="form-control"
+               name="address"
+               id="address"
+               [(ngModel)]="Address">
+
+        <br>
+        <div class="btnContainer">
+          <button class="btn btn-danger" type="button" (click)="clearForm()">Reset</button>
+          <button [disabled]="!detail.valid" class="btn btn-success" type="submit">Submit</button>
+          <button class="btn btn-primary" type="button"   (click)="log()">Log</button>
+        </div>
+
+        <!--     End   -->
+      </form>
+
+    </div>
+  </div>
+</div>

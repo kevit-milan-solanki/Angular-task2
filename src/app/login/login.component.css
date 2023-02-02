@@ -1,0 +1,21 @@
+.container{
+  max-width: 600px;
+  margin: 60px auto 0;
+  display: flex;
+  padding: 50px 0 50px 0;
+  flex-direction: column;
+  gap: 50px;
+  border: 1px solid black;
+}
+.btn{
+  margin-top: 15px;
+}
+
+label{
+  margin-top: 10px;
+}
+
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

@@ -1,0 +1,12 @@
+.container{
+  max-width: 600px;
+  margin: 60px auto 0;
+  padding: 30px 0 50px 0;
+  border: 1px solid black;
+}
+.detail-Header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 40px;
+}
