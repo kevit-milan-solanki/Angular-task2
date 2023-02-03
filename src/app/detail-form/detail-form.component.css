@@ -7,7 +7,7 @@ select.ng-invalid.ng-touched{
   border: 1px solid red;
 }
 .container{
-  max-width: 600px;
+  width: 600px;
   margin: 10px auto 0;
   padding: 30px 0 50px 0;
   border: 1px solid black;
@@ -17,4 +17,32 @@ select.ng-invalid.ng-touched{
   display: flex;
   gap: 20px;
   justify-content:space-around;
+}
+
+.error{
+  color: red;
+}
+.hobbyInput{
+  margin-left: 10px;
+}
+
+
+
+.Lable::after {
+  color: red;
+  border-style: none;
+  content: '*';
+}
+
+
+.buttton{
+  width: 500px;
+}
+@media only screen and (max-width: 767px) {
+
+  .container{
+
+    padding: 30px 50px 50px 50px;
+  }
+
 }

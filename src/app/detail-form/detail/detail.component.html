@@ -7,13 +7,12 @@
   <button class="btn btn-danger" (click)="logOut()">LogOut</button>
 </div>
 <hr>
-
 <p>Name : {{name}}</p>
 <p>Email ID : {{email}}</p>
-<p>Mobile Num. :{{mobilenum}}</p>
+<p>Mobile Num. : {{mobilenum}}</p>
 <p>Date Of Birth : {{DateOfBirth | date : 'longDate'}}</p>
 <p>Institute Name: {{institute}}</p>
-<p>Qualification :  {{educaton}}</p>
+<p>Qualification : {{educaton}}</p>
 <p *ngIf="Hobies"> Hobies : {{Hobies}} </p>
 <p>Gender : {{gender }} </p>
 <p *ngIf="Address">Address : {{ Address}}</p>

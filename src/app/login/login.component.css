@@ -1,4 +1,4 @@
-.container{
+.container-fuild {
   max-width: 600px;
   margin: 60px auto 0;
   display: flex;
@@ -19,3 +19,13 @@ label{
 input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
+
+@media only screen and (max-width: 767px) {
+
+  .container{
+
+    padding: 30px 50px 50px 50px;
+  }
+
+}
+

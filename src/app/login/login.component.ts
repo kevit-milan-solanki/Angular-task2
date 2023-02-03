@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormDetailService} from "../detail-form/form-detail.service";
 
@@ -8,17 +8,18 @@ import {FormDetailService} from "../detail-form/form-detail.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private router : Router ,
-              private userDetailService : FormDetailService) {
+  constructor(private router: Router,
+              private userDetailService: FormDetailService) {
   }
+
   username = '';
   password = '';
 
   onSubmit() {
+    if (this.username == '19it023.milan.solanki@vvpedulink.ac.in' && this.password == "1234") {
+      this.userDetailService.UserEmail = this.username;
 
-    if(this.username == '19it023.milan.solanki@vvpedulink.ac.in' && this.password == "1234"){
-      this.userDetailService.UserEmail = this.username
-      console.log("Success")
+      alert("Wellcome!  " + this.username);
       this.router.navigate(['/detail-form'])
     }
   }

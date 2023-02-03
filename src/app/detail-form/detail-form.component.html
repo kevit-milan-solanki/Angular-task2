@@ -4,113 +4,155 @@
     <div class="col-md-10 offset-md-1">
       <h3>Enter Your Details</h3>
       <form (ngSubmit)="addData(detail)" #detail='ngForm'>
-        <!--        <h5>Personal Detail</h5>-->
-
-        <label for="name">Name:</label>
+        <!--        name-->
+        <label class="Lable" for="name">Name</label>
         <input class="form-control"
                type="text"
                id="name"
+               #name="ngModel"
                name="name"
-               [ngModel]='name'
-               required
-        >
+               ngModel
+               required>
+        <p class="error" *ngIf="!name.valid && name.touched">*Please Enter Name</p>
 
+        <!--        date Of Birth-->
         <br>
-        <label for="dob"> Date of Birth:</label>
+        <label class="Lable" for="dob"> Date of Birth</label>
         <input type="date"
                class="form-control"
                id="dob"
+               #DOB='ngModel'
                name="dob"
                required
-               [(ngModel)]="dob">
+               ngModel
+        >
+        <p class="error" *ngIf="!DOB.valid && DOB.touched">*Please Enter Date Of Birth</p>
+        <p class="error"   *ngIf="doberror">*You are Below 20</p>
 
+
+        <!--Email-->
         <br>
-        <label for="email"> Email:</label>
+        <label class="Lable" for="email"> Email</label>
         <input class="form-control"
-               id="email" name="email"
-               [(ngModel)]="email"
+               id="email"
+               name="email"
+               ngModel='{{emailID}}'
                required
                email
-               type="email">
+               type="email"
+               #email="ngModel">
+        <p class="error" *ngIf="!email.valid && email.touched">*Please Enter Valid Email</p>
 
+        <!--        Mobile Number-->
         <br>
-        <label for="mobileNumber">Mobile Number:</label>
+        <label class="Lable" for="mobileNumber">Mobile Number</label>
         <input
           type="text"
           class="form-control"
           name="mobileNumber"
-          [(ngModel)]="mobileNum"
+          #mobileNum='ngModel'
+          ngModel
           required
           [pattern]="'^(0|91)?[6-9][0-9]{9}$'"
           id="mobileNumber">
-        <!--        <hr>-->
-        <!--        <h5>Educational Detail</h5>-->
+        <p class="error" *ngIf="!mobileNum.valid && mobileNum.touched">*Please enter Valid Mobile Number</p>
 
+        <!--        Institute Name-->
         <br>
-        <label for="instituteName">Name of institute or school:</label>
+        <label class="Lable" for="instituteName">Name of institute or school</label>
         <input type="text"
                class="form-control"
                id="instituteName"
-               [(ngModel)]="instituteName"
+               ngModel
+               #institute='ngModel'
                required
                name="instituteName">
+        <p class="error" *ngIf="!institute.valid && institute.touched">*Please Enter Institute Name</p>
 
+        <!--        Education-->
         <br>
-        <label for="education">Education:</label>
-        <select class="form-control" id="education" [(ngModel)]="selectedEducation"
+        <label class="Lable" for="education">Education</label>
+        <select class="form-control"
+                id="education"
+                ngModel
+                #education='ngModel'
                 required
                 name="education">
-          <option *ngFor="let option of educationOptions" [value]="option">{{ option }}</option>
+          <option *ngFor="let option of educationOptions"
+                  [value]="option">{{ option }}
+          </option>
         </select>
 
+        <p class="error" *ngIf="!education.valid && education.touched">*Please Enter Eduction</p>
+        <!--        Hobbies-->
         <br>
         <div class="form-group">
-          <label>Hobbies (optional):</label>
-          <div *ngFor="let option of hobbyOptions">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input"
-                     type="checkbox"
-                     id="{{ option }}" [(ngModel)]="selectedHobbies[option] "
-                     name="hobbies">
-              <label class="form-check-label" for="{{ option }}">{{ option }}</label>
-            </div>
+          <label>Hobbies:</label>
+          <div *ngFor="let hoby of hobbby">
+            <input type="checkbox"
+                   name="{{hoby.hName}}"
+                   (change)="onChange()"
+                   [(ngModel)]="hoby.isSelected">
+            <label  class="hobbyInput">{{hoby.hName}}</label>
           </div>
         </div>
 
+        <!--        Gender-->
         <br>
-        <label>Gender:</label><br>
+        <label class="Lable">Gender</label><br>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" id="male" [(ngModel)]="gender" name="gender" value="male"
+          <input class="form-check-input"
+                 type="radio" id="male"
+                 #gender = 'ngModel'
+                 ngModel
+                 name="gender"
+                 value="male"
                  required>
-          <label class="form-check-label" for="male">Male</label>
+          <label  class="form-check-label"
+                 for="male">Male</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" id="female" [(ngModel)]="gender" name="gender" value="female"
+          <input class="form-check-input"
+                 type="radio" id="female"
+                 #gender = 'ngModel'
+                 ngModel
+                 name="gender"
+                 value="female"
                  required>
-          <label class="form-check-label" for="female">Female</label>
+          <label class="form-check-label"
+                 for="female">Female</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" id="other" [(ngModel)]="gender" name="gender" value="other"
+          <input class="form-check-input"
+                 type="radio" id="other"
+                 #gender = 'ngModel'
+                 ngModel
+                 name="gender"
+                 value="other"
                  required>
-          <label class="form-check-label" for="other">Other</label>
+          <label class="form-check-label"
+                 for="other">Other</label>
         </div>
+        <p class="error" *ngIf="!gender.valid && gender.touched">Please Enter Gender</p>
         <br>
 
+
+        <!--        Address-->
         <br>
-        <label for="address">Address: ( Optional )</label>
+        <label for="address">Address: </label>
         <input class="form-control"
                name="address"
                id="address"
-               [(ngModel)]="Address">
+               ngModel>
 
+        <p class="error" *ngIf="!validForm">*Please fill the Form Values</p>
+
+        <!--        Buttons-->
         <br>
         <div class="btnContainer">
-          <button class="btn btn-danger" type="button" (click)="clearForm()">Reset</button>
-          <button [disabled]="!detail.valid" class="btn btn-success" type="submit">Submit</button>
-          <button class="btn btn-primary" type="button"   (click)="log()">Log</button>
+          <button class="btn btn-danger buttton" type="button" (click)="clearForm()">Reset</button>
+          <button  class="btn btn-success buttton" type="submit">Submit</button>
         </div>
-
-        <!--     End   -->
       </form>
 
     </div>

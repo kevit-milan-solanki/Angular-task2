@@ -16,36 +16,25 @@ export class DetailComponent implements OnInit{
               private router : Router) {
   }
 
-
   ngOnInit() {
-    if (!this.formDetailService.Detail){
-      return this.formDetailService.Detail
-    }
+    console.log(this.Hobies)
   }
+
 
   logOut(){
     this.formDetailService.Detail = ''
     this.router.navigate(['login'])
 
   }
-
-
   detail = this.formDetailService.Detail;
-
   name = this.detail.name;
   DateOfBirth = this.detail.dob;
-
   email = this.detail.email;
-
   mobilenum = this.detail.mobileNumber;
-
   institute = this.detail.instituteName;
   educaton = this.detail.education;
-  Hobies = this.detail.hobbies;
-
+  Hobies = this.formDetailService.hobby;
   gender = this.detail.gender;
-
   Address = this.detail.address;
-
 
 }
