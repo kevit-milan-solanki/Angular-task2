@@ -7,34 +7,32 @@ import {Router} from "@angular/router";
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class DetailComponent implements OnInit{
+export class DetailComponent implements OnInit {
 
 
-
-
-  constructor(private formDetailService: FormDetailService,
-              private router : Router) {
+  constructor(private readonly formDetailService: FormDetailService,
+              private readonly router: Router) {
   }
 
   ngOnInit() {
-    console.log(this.Hobies)
+
   }
 
 
-  logOut(){
+  logOut() {
     this.formDetailService.Detail = ''
-    this.router.navigate(['login'])
+    this.router.navigate(['login']);
 
   }
-  detail = this.formDetailService.Detail;
-  name = this.detail.name;
-  DateOfBirth = this.detail.dob;
-  email = this.detail.email;
-  mobilenum = this.detail.mobileNumber;
-  institute = this.detail.instituteName;
-  educaton = this.detail.education;
-  Hobies = this.formDetailService.hobby;
-  gender = this.detail.gender;
-  Address = this.detail.address;
 
+  detail: any = this.formDetailService.Detail;
+  name: string = this.detail.name;
+  DateOfBirth = this.detail.dateOfBirth;
+  email: string = this.formDetailService.UserEmail;
+  mobileNumber: string = this.detail.mobileNumber.internationalNumber;
+  instituteName: string = this.detail.instituteName;
+  education: string = this.detail.education;
+  Hobbies: string = this.formDetailService.hobby;
+  gender: string = this.detail.gender;
+  Address: string = this.detail.address;
 }

@@ -1,7 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {NgForm} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormDetailService} from "./form-detail.service";
+import {
+  CountryISO,
+  SearchCountryField,
+} from "ngx-intl-tel-input";
 
 @Component({
   selector: 'app-detail-form',
@@ -10,80 +14,84 @@ import {FormDetailService} from "./form-detail.service";
 })
 export class DetailFormComponent implements OnInit {
 
-  @ViewChild('detail') detailForm: NgForm;
-
-
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private details: FormDetailService) {
+  constructor(private readonly router: Router,
+              private readonly detailServer: FormDetailService) {
   }
 
+  SearchCountryField = SearchCountryField;
+  CountryISO = CountryISO;
+  detailForms: FormGroup;
+  name: string;
+  age: number;
+  date: any;
+  selectedHobby: Array<any> = [];
+  genders = ['male', 'female', "others"];
 
-  clearForm() {
-    this.detailForm.reset();
-  }
-
-  emailID = this.details.UserEmail;
-  educationOptions = [
+  emailID: string = this.detailServer.UserEmail;
+  educationOptions: Array<String> = [
     'High School',
     'College',
     'Graduate School',
     'Other'
   ];
-  hobbby = [];
 
-  ngOnInit() {
-    this.getHobby();
+
+  loadForm(): void {
+    this.detailForms = new FormGroup<any>({
+      name: new FormControl(null, [Validators.required]),
+      email: new FormControl({value: this.emailID, disabled: true}),
+      dateOfBirth: new FormControl(null, [Validators.required, this.validAge.bind(this)]),
+      mobileNumber: new FormControl(null, [Validators.required]),
+      instituteName: new FormControl(null, [Validators.required]),
+      education: new FormControl(null, [Validators.required]),
+      gender: new FormControl(null, [Validators.required]),
+      address: new FormControl(null),
+      selectedHobby: new FormControl(null),
+    })
   }
 
-  getHobby() {
-    this.hobbby = [
-      {id: 1, hName: "Reading", isSelected: false},
-      {id: 2, hName: "Writing", isSelected: false},
-      {id: 3, hName: "Traveling", isSelected: false},
-      {id: 4, hName: "Cooking", isSelected: false},
-      {id: 5, hName: "Other", isSelected: false},
-    ]
+
+  validForm = false;
+
+  ngOnInit(): void {
+    this.loadForm()
   }
 
-  selectedHoby = [];
+  hobbies = [
+    {id: 1, hobbyName: "Reading", isSelected: false},
+    {id: 2, hobbyName: "Writing", isSelected: false},
+    {id: 3, hobbyName: "Traveling", isSelected: false},
+    {id: 4, hobbyName: "Cooking", isSelected: false},
+    {id: 5, hobbyName: "Other", isSelected: false},
+  ]
 
-  onChange() {
-    this.selectedHoby = this.hobbby.filter(h => h.isSelected == true).map(h => h.hName)
+  validAge(date: FormControl) {
+    this.date = new Date(date.value)
+    let age = Math.abs(Date.now() - this.date);
+    this.age = Math.floor((age / (1000 * 3600 * 24)) / 365);
+    if (this.age < 20) {
+      return {age: true}
+    }
+    return null;
   }
 
-  dob: Date;
-  currantDate = new Date()
-  validForm = true;
-  age: number;
-  date;
-  doberror = false;
+  clearForm(): void {
+    this.loadForm()
+  }
 
-  addData(details: NgForm) {
-    const detail = details.value;
+  onChange(): void {
+    this.selectedHobby = this.hobbies.filter(hobby => hobby.isSelected == true).map(hobby => hobby.hobbyName);
+  }
 
-    this.date = new Date(detail.dob)
-    var timeDiff = Math.abs(Date.now() - this.date);
-    this.age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+  addData(): void {
 
-    if (details.valid && this.age > 18) {
-      this.details.Detail = detail;
-      this.details.hobby = this.selectedHoby;
-      this.clearForm();
+    const detail = this.detailForms.value;
+    if (this.detailForms.valid && this.age >= 20) {
+      this.detailServer.Detail = detail;
+      this.detailServer.hobby = this.selectedHobby
       this.router.navigate(['detail']);
-      this.validForm = true;
-      this.doberror = false;
     } else {
-      if (this.age < 20) {
-        this.doberror = true;
-      }
-      else {
-        this.doberror = false;
-
-      }
-      this.validForm = false
-
+      this.validForm = true;
     }
   }
-
 }

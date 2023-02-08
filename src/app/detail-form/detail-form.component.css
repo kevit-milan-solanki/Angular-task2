@@ -1,32 +1,15 @@
-
 input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
 
-select.ng-invalid.ng-touched{
+select.ng-invalid.ng-touched {
   border: 1px solid red;
 }
-.container{
-  width: 600px;
-  margin: 10px auto 0;
-  padding: 30px 0 50px 0;
-  border: 1px solid black;
-}
 
-.btnContainer{
-  display: flex;
-  gap: 20px;
-  justify-content:space-around;
-}
 
-.error{
+.error {
   color: red;
 }
-.hobbyInput{
-  margin-left: 10px;
-}
-
-
 
 .Lable::after {
   color: red;
@@ -34,15 +17,11 @@ select.ng-invalid.ng-touched{
   content: '*';
 }
 
-
-.buttton{
-  width: 500px;
+::ng-deep ngx-intl-tel-input .iti {
+  width: 100% !important;
 }
-@media only screen and (max-width: 767px) {
 
-  .container{
-
-    padding: 30px 50px 50px 50px;
-  }
+ngx-intl-tel-input.ng-invalid.ng-touched {
+  border: 1px solid red;
 
 }
