@@ -23,7 +23,6 @@
                id="birtDate"
                name="birtDate"
                formControlName="dateOfBirth"
-
         >
         <div
           *ngIf="!detailForms.get('dateOfBirth').valid && detailForms.get('dateOfBirth').touched"
@@ -31,7 +30,6 @@
           <span *ngIf="detailForms.get('dateOfBirth').errors['age']">You are below 20</span>
           <span *ngIf="detailForms.get('dateOfBirth').errors['required']">Please Enter Date Of Barth!</span>
         </div>
-
 
         <label class="Lable mt-3" for="email"> Email</label>
         <input class="form-control"
@@ -47,7 +45,6 @@
         </div>
 
         <label class="Lable mt-3" for="phone">Mobile Number</label>
-
         <div>
           <ngx-intl-tel-input class=" col-sm-12  cl"
                               [preferredCountries]="[CountryISO.India]"
@@ -139,4 +136,9 @@
     </div>
   </div>
 </div>
+
+
+
+
+
 

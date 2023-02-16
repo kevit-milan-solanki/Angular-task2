@@ -13,7 +13,7 @@ import {ToastrService} from "ngx-toastr";
 export class LoginComponent implements OnInit {
   constructor(private readonly router: Router,
               private readonly userDetailService: FormDetailService,
-              private readonly toastr: ToastrService) {
+              private readonly toaster: ToastrService) {
   }
 
   loginForm: FormGroup;
@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
     const loginDetail = this.loginForm.value;
     if (loginDetail.userEmail == '19it023.milan.solanki@vvpedulink.ac.in' && loginDetail.password == "1234") {
       this.userDetailService.UserEmail = loginDetail.userEmail;
-      this.toastr.success('LogIn Successful', 'Success');
-      this.router.navigate(['/detail-form']);
+      this.toaster.success('LogIn Successful', 'Success');
+      this.router.navigate(['./', 'detail-form']);
     }
   }
 }

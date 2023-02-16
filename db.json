@@ -1,0 +1,19 @@
+{
+  "posts": {
+    "name": "Milan",
+    "dateOfBirth": "2002-02-12",
+    "mobileNumber": {
+      "number": "9925588260",
+      "internationalNumber": "+91 99255 88260",
+      "nationalNumber": "099255 88260",
+      "e164Number": "+919925588260",
+      "countryCode": "IN",
+      "dialCode": "+91"
+    },
+    "instituteName": "V.V.P",
+    "education": "High School",
+    "gender": "male",
+    "address": null,
+    "selectedHobby": true
+  }
+}

@@ -10,4 +10,9 @@ export class FormDetailService {
   public Detail: any;
   public hobby: any;
 
+  SetData(data){
+    this.Detail =data
+    console.log(this.Detail)
+  }
+
 }

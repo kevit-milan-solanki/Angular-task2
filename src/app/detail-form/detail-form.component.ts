@@ -6,6 +6,7 @@ import {
   CountryISO,
   SearchCountryField,
 } from "ngx-intl-tel-input";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-detail-form',
@@ -15,6 +16,7 @@ import {
 export class DetailFormComponent implements OnInit {
 
   constructor(private readonly router: Router,
+              private httpClient: HttpClient,
               private readonly detailServer: FormDetailService) {
   }
 
@@ -75,8 +77,10 @@ export class DetailFormComponent implements OnInit {
     return null;
   }
 
-  clearForm(): void {
-    this.loadForm()
+  clearForm(){
+    this.loadForm();
+
+    console.log("hello")
   }
 
   onChange(): void {
@@ -84,8 +88,10 @@ export class DetailFormComponent implements OnInit {
   }
 
   addData(): void {
-
     const detail = this.detailForms.value;
+    this.httpClient.get("http://localhost:3000/posts").subscribe(res =>{
+      this.detailServer.Detail = res;
+    })
     if (this.detailForms.valid && this.age >= 20) {
       this.detailServer.Detail = detail;
       this.detailServer.hobby = this.selectedHobby
